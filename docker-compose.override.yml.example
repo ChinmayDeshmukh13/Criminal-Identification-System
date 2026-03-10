@@ -1,0 +1,38 @@
+# Docker Compose Override for Local Development
+# This file overrides settings in docker-compose.yml for development use
+# Rename to docker-compose.override.yml to use (Git will ignore it)
+
+version: '3.8'
+
+services:
+  api:
+    # For development, rebuild from source
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - ENVIRONMENT=development
+      - DEBUG=true
+      - LOG_LEVEL=DEBUG
+      - API_RELOAD=true
+    # Mount source code for live reload
+    volumes:
+      - ./backend:/app/backend
+      - ./frontend:/app/frontend
+      - ./data:/app/data
+      - ./logs:/app/logs
+    # Keep container running for debugging
+    stdin_open: true
+    tty: true
+    # Override the default command for development
+    command: >
+      bash -c "pip install -e . &&
+      uvicorn backend.app:app --host 0.0.0.0 --port 8000 --reload"
+
+  nginx:
+    # Optional: disable Nginx for development and access API directly
+    image: nginx:alpine
+    environment:
+      - ENVIRONMENT=development
+    # Comment out for development if accessing API directly
+    # To disable: set profile: [production]

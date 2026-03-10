@@ -6,6 +6,7 @@ __pycache__/
 .Python
 env/
 venv/
+.venv/
 *.egg-info/
 dist/
 build/
@@ -22,10 +23,24 @@ build/
 Thumbs.db
 desktop.ini
 
+# Environment and Secrets
+.env
+.env.local
+.env.*.local
+.env.production.local
+*.key
+*.pem
+certs/
+
 # Logs
 *.log
 server.log
 server.err
+logs/
+
+# Docker
+.docker/
+docker-compose.override.yml
 
 # Data (optional - uncomment if you want to ignore data)
 # data/
@@ -35,3 +50,14 @@ server.err
 .tmp/
 *.tmp
 snapshot.jpg
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.hypothesis/
+
+# Misc
+.vagrant/
+.terraform/
+*.egg

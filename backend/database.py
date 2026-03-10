@@ -19,3 +19,4 @@ def load_all_embeddings():
             name = file.replace(".npy", "")
             db[name] = np.load(f"{EMB_DIR}/{file}")
     return db
+ 

@@ -1,9 +1,11 @@
-fastapi[all]
+fastapi
 uvicorn[standard]
 opencv-python
 numpy
 insightface
 python-multipart
 onnxruntime
+gunicorn
 python-dotenv
 pydantic-settings
+python-json-logger
